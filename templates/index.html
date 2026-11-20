@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Router Automation</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            background: white;
+            width: 70%;
+            margin: auto;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px #ccc;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            background: #eeeeee;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 5px;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>Router Automation System</h1>
+
+        <p>Click the button below to connect to the router and execute the commands.</p>
+
+        <form method="POST" action="/">
+            <button type="submit">Connect to Router</button>
+        </form>
+
+        <!-- This block only shows if the Python backend passes an 'error' variable -->
+        {% if error %}
+        <h3 class="error">Connection Error</h3>
+        <p>{{ error }}</p>
+        {% endif %}
+
+        <!-- This block only shows if the Python backend passes a 'results' variable -->
+        {% if results %}
+        <h2>Command Results</h2>
+
+        {% for command, output in results.items() %}
+        <div class="result">
+            <h3>{{ command }}</h3>
+            <pre>{{ output }}</pre>
+        </div>
+        {% endfor %}
+
+        {% endif %}
+
+    </div>
+
+</body>
+</html>
